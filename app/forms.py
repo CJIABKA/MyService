@@ -30,4 +30,4 @@ class RegistrationForm(FlaskForm):
 
 
 class IndexForm(FlaskForm):
-    submit = SubmitField('Sign In')
+    submit = SubmitField('Refresh')

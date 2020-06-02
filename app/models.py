@@ -27,9 +27,9 @@ class User(UserMixin, db.Model):
 
 
 services_on_stations = db.Table('services_on_stations',
-    db.Column('station_id', db.Integer, db.ForeignKey('stations.id')),
-    db.Column('Services_id', db.Integer, db.ForeignKey('services.id'))
-)
+                                db.Column('station_id', db.Integer, db.ForeignKey('stations.id')),
+                                db.Column('services_id', db.Integer, db.ForeignKey('services.id'))
+                                )
 
 
 class Stations(db.Model):
@@ -37,8 +37,9 @@ class Stations(db.Model):
     coordinates = db.Column(db.String(100))
     number = db.Column(db.Integer)
     address = db.Column(db.String(200))
-    photos = db.relationship('Photos', backref='station', lazy='dynamic')
+    photos = db.relationship('Photos', backref='stations', lazy='dynamic')
     #services = db.relationship('Services', backref='station', lazy='dynamic')
+    services = db.relationship("Services", secondary=services_on_stations, backref='stations')
     #goods = db.relationship('Goods', backref='station', lazy='dynamic')
 
     def __repr__(self):
@@ -72,13 +73,13 @@ class Services(db.Model):
 #         return f'<connection {self.station_id} {self.service_id}>'
 
 
-class Goods(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(140))
-    amount = db.Column(db.Integer)
-    currency = db.Column(db.String(140))
-    #station_id = db.Column(db.Integer, db.ForeignKey('stations.id'))
-
-    def __repr__(self):
-        return f'<Goods {self.title}>'
+# class Goods(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     title = db.Column(db.String(140))
+#     amount = db.Column(db.Integer)
+#     currency = db.Column(db.String(140))
+#     #station_id = db.Column(db.Integer, db.ForeignKey('stations.id'))
+#
+#     def __repr__(self):
+#         return f'<Goods {self.title}>'
 
