@@ -31,6 +31,11 @@ services_on_stations = db.Table('services_on_stations',
                                 db.Column('services_id', db.Integer, db.ForeignKey('services.id'))
                                 )
 
+# goods_on_stations = db.Table('goods_on_stations',
+#                              db.Column('station_id', db.Integer, db.ForeignKey('stations.id')),
+#                              db.Column('goods_id', db.Integer, db.ForeignKey('goods.id'))
+#                              )
+
 
 class Stations(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -38,9 +43,9 @@ class Stations(db.Model):
     number = db.Column(db.Integer)
     address = db.Column(db.String(200))
     photos = db.relationship('Photos', backref='stations', lazy='dynamic')
-    #services = db.relationship('Services', backref='station', lazy='dynamic')
     services = db.relationship("Services", secondary=services_on_stations, backref='stations')
-    #goods = db.relationship('Goods', backref='station', lazy='dynamic')
+    #goods = db.relationship("Goods", secondary=goods_on_stations, backref='stations')
+    goods = db.relationship("Goods",  backref='stations', lazy='dynamic')
 
     def __repr__(self):
         return f'<Station # {self.number}>'
@@ -58,28 +63,18 @@ class Photos(db.Model):
 class Services(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(140))
-    #station_id = db.Column(db.Integer, db.ForeignKey('stations.id'))
 
     def __repr__(self):
         return f'<Service {self.title}>'
 
 
-# class Join_services_on_stations(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     station_id = db.Column(db.Integer)
-#     service_id = db.Column(db.Integer)
-#
-#     def __repr__(self):
-#         return f'<connection {self.station_id} {self.service_id}>'
+class Goods(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(140))
+    amount = db.Column(db.Float)
+    currency = db.Column(db.String(140))
+    station_id = db.Column(db.Integer, db.ForeignKey('stations.id'))
 
-
-# class Goods(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     title = db.Column(db.String(140))
-#     amount = db.Column(db.Integer)
-#     currency = db.Column(db.String(140))
-#     #station_id = db.Column(db.Integer, db.ForeignKey('stations.id'))
-#
-#     def __repr__(self):
-#         return f'<Goods {self.title}>'
+    def __repr__(self):
+        return f'<Goods {self.title}>'
 
