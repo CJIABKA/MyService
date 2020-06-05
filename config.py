@@ -16,3 +16,4 @@ class Config(object):
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     ADMINS = ['cjiakba86@gmail.com']
+    #JSON_AS_ASCII = False
