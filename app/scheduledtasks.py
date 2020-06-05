@@ -1,14 +1,17 @@
-#from app import crontab
-#import requests
-#import random
+from app import crontab
 import json
 from app.models import Stations, Services, Photos, Goods
 from app import db
+#import requests
+
+@crontab.job(day=2)
+def scheduled_job_1():
+    put_data_in_db_1()
 
 
-# @crontab.job(minute=1)
-# def test_scheduled_job():
-#     print("yesh")
+@crontab.job(hour=12)
+def scheduled_job_2():
+    put_data_in_db_2()
 
 
 def take_data_from_source_1():
@@ -21,7 +24,7 @@ def take_data_from_source_1():
 
 
 def take_data_from_source_2():
-    #data = requests.get("https://service_1.com/somedata")
+    #data = requests.get("https://service_2.com/somedata")
     #some code to remake given data to properly formed json
     #taking data from synt json file
     with open("../synt_sources/source_2.json", encoding='cp1251') as read_file:
@@ -81,8 +84,6 @@ def put_data_in_db_2():
                 goods.amount = amount
                 goods.currency = currency
         db.session.commit()
-
-
 
 
 if __name__ == "__main__":

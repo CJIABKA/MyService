@@ -12,7 +12,7 @@ db = SQLAlchemy(appF)
 migrate = Migrate(appF, db)
 login = LoginManager(appF)
 login.login_view = 'login'
-#crontab = Crontab(appF)
+crontab = Crontab(appF)
 
 
-from app import routes, models, errors
+from app import routes, models, errors, scheduledtasks
