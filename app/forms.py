@@ -29,5 +29,26 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('Please use a different email address.')
 
 
-class IndexForm(FlaskForm):
-    submit = SubmitField('Refresh')
+class EditStationForm(FlaskForm):
+    coordinates = StringField('coordinates', validators=[DataRequired()])
+    number = StringField('number', validators=[DataRequired()])
+    address = StringField('address', validators=[DataRequired()])
+    submit = SubmitField('Update')
+
+
+class EditGoodsForm(FlaskForm):
+    title = StringField('title', validators=[DataRequired()])
+    amount = StringField('amount', validators=[DataRequired()])
+    currency = StringField('currency', validators=[DataRequired()])
+    image_url = StringField('image_url', validators=[DataRequired()])
+    submit = SubmitField('Update')
+
+
+class EditServicesForm(FlaskForm):
+    title = StringField('title', validators=[DataRequired()])
+    image_url = StringField('image_url', validators=[DataRequired()])
+    submit = SubmitField('Update')
+
+
+#class IndexForm(FlaskForm):
+#    submit = SubmitField('Refresh')
