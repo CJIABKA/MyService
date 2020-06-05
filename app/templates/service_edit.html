@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Edit Servicee</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>Service id: {{ form.s_id }}</p>
+        <p>
+            {{ form.title.label }}<br>
+            {{ form.title(size=32) }}<br>
+            {% for error in form.title.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.image_url.label }}<br>
+            {{ form.image_url(size=32) }}<br>
+            {% for error in form.image_url.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+        <p><a href="{{ form.lnk }}">back</a></p>
+    </form>
+{% endblock %}

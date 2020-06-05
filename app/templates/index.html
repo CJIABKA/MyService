@@ -1,7 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
     <h1>Hi, {{ current_user.username }}!</h1>
-    <form action="" method="post">
+    <table border="1">
+        <caption>Таблица элементов базы данных</caption>
+        <tr>
+            <th>id</th>
+            <th>coordinates</th>
+            <th>number</th>
+            <th>address</th>
+            <th>photos count</th>
+            <th>services count</th>
+            <th>goods count</th>
+            <th></th>
+        </tr>
+        {% for station in stations %}
+            {% include '_station.html' %}
+        {% endfor %}
+    </table>
+    {% if prev_url %}
+        <a href="{{ prev_url }}"><-previous</a>
+    {% endif %}
+    {% if next_url %}
+        <a href="{{ next_url }}">next-></a>
+    {% endif %}
+    {# <form action="" method="post">
         <p>{{ form.submit() }}</p>
-    </form>
+    </form> #}
 {% endblock %}

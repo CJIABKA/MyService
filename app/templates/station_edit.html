@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Edit Station</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>Station id: {{ form.st_id }}</p>
+        <p>
+            {{ form.coordinates.label }}<br>
+            {{ form.coordinates(size=32) }}<br>
+            {% for error in form.coordinates.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.number.label }}<br>
+            {{ form.number(size=32) }}<br>
+            {% for error in form.number.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.address.label }}<br>
+            {{ form.address(size=32) }}<br>
+            {% for error in form.address.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+        <p><a href="{{ form.lnk }}">back</a></p>
+        <table border="1">
+            <caption>Фото станции</caption>
+            {% for photo in form.photos %}
+                <tr>
+                    <th><a href="{{ photo.url }}">{{ photo.url }}</a></th>
+                </tr>
+            {% endfor %}
+        </table>
+        <table border="1">
+            <caption>Таблица топлива</caption>
+            <tr>
+                <th>Тип топлива</th>
+                <th>Цена</th>
+                <th>Валюта</th>
+                <th>Изображение</th>
+                <th></th>
+            </tr>
+            {% for product in form.goods %}
+                <tr>
+                    <th>{{ product.title }}</th>
+                    <th>{{ product.amount }}</th>
+                    <th>{{ product.currency }}</th>
+                    <th>{{ product.image_url }}</th>
+                    <th><a href="{{ url_for('product_edit', g_id=product.id) }}">edit</a></th>
+                </tr>
+            {% endfor %}
+        </table>
+        <table border="1">
+            <caption>Таблица услуг</caption>
+            <tr>
+                <th>Наименование услуги</th>
+                <th>Изображение</th>
+                <th></th>
+            </tr>
+            {% for service in form.services %}
+                <tr>
+                    <th>{{ service.title }}</th>
+                    <th>{{ service.image_url }}</th>
+                    <th><a href="{{ url_for('service_edit', s_id=service.id, st_id=form.st_id) }}">edit</a></th>
+                </tr>
+            {% endfor %}
+        </table>
+    </form>
+{% endblock %}

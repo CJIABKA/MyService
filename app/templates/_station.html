@@ -1,0 +1,10 @@
+<tr valign="top">
+    <td>{{ station.id }}</td>
+    <td>{{ station.coordinates }}</td>
+    <td>{{ station.number }}</td>
+    <td>{{ station.address }}</td>
+    <td>{{ station.photos|list|length }}</td>
+    <td>{{ station.services|length }}</td>
+    <td>{{ station.goods|list|length }}</td>
+    <td><a href="{{ url_for('station_edit', st_id=station.id) }}">edit</a></td>
+</tr>
