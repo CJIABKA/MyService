@@ -63,6 +63,7 @@ class Photos(db.Model):
 class Services(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(140))
+    image_url = db.Column(db.String(140))
 
     def __repr__(self):
         return f'<Service {self.title}>'
@@ -73,6 +74,7 @@ class Goods(db.Model):
     title = db.Column(db.String(140))
     amount = db.Column(db.Float)
     currency = db.Column(db.String(140))
+    image_url = db.Column(db.String(140))
     station_id = db.Column(db.Integer, db.ForeignKey('stations.id'))
 
     def __repr__(self):
